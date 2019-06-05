@@ -63,23 +63,63 @@ describe 'A game of rock paper scissors' do
         expect(game.play(:rock, :scissors)).to eq("Rock beats scissors!")
         expect(game.play(:scissors, :rock)).to eq("Rock beats scissors!")
       end
-      skip('is finished')
+      it 'resets the game after it is finished' do
+        game = Game.new
+        game.start
+        game.play(:rock, :scissors)
+        expect(game).to be_finished
+      end
     end
 
     context 'rock vs paper' do
-      skip('returns "Paper beats rock!"')
-      skip('is finished')
+      it 'announces the correct winner' do
+        game = Game.new
+        game.start
+        expect(game.play(:rock, :paper)).to eq("Paper beats rock!")
+        expect(game.play(:paper, :rock)).to eq("Paper beats rock!")
+      end
+      it 'resets the game after it is finished' do
+        game = Game.new
+        game.start
+        game.play(:rock, :paper)
+        expect(game).to be_finished
+      end
     end
 
 
     context 'scissors vs paper' do
-      skip('returns "Scissors vs paper!"')
-      skip('is finished')
+      it 'announces the correct winner' do
+        game = Game.new
+        game.start
+        expect(game.play(:paper, :scissors)).to eq("Scissors beats paper!")
+        expect(game.play(:scissors, :paper)).to eq("Scissors beats paper!")
+      end
+      it 'resets the game after it is finished' do
+        game = Game.new
+        game.start
+        game.play(:paper, :scissors)
+        expect(game).to be_finished
+      end
     end
 
     context 'a tie game' do
-      skip('returns "Tie game. Try again!"')
-      skip('is not finished')
+      it 'announces the correct winner' do
+        game = Game.new
+        game.start
+        expect(game.play(:rock, :rock)).to eq("Tie game. Try again!")
+        expect(game.play(:scissors, :scissors)).to eq("Tie game. Try again!")
+        expect(game.play(:paper, :paper)).to eq("Tie game. Try again!")
+      end
+      it 'resets the game after it is finished' do
+        game = Game.new
+        game.start
+        game.play(:rock, :rock)
+        expect(game).not_to be_finished
+        game.play(:scissors, :scissors)
+        expect(game).not_to be_finished
+        game.play(:paper, :paper)
+        expect(game).not_to be_finished
+      end
     end
 
   end
